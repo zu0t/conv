@@ -3,24 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unbinded Bio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>My Bio</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1a1a1a;
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: blur(8px);
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            z-index: 1;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .description {
+            font-size: 1.5em;
+            color: #fff;
+        }
+
+        .unmute {
+            margin-top: 15px;
+            color: #ff4081;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: none; /* Hidden until video loads */
+        }
+    </style>
 </head>
 <body>
-    <div class="background-video">
-        <video autoplay muted loop id="bgVideo">
-            <source id="videoSource" src="https://cdn.discordapp.com/attachments/1270634825715417141/1274050022836801599/4Bf1cvN.mp4?ex=66c0d70c&is=66bf858c&hm=c811d6a6b04e84273cc9d687ea1a71a6e2291e985ec3369cfc77e1a19d0c0c92&" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <button class="unmute-btn" id="unmuteBtn">- Unmute -</button>
-    </div>
-    <div class="content-box">
-        <div class="profile-image">
-            <img src="https://cdn.discordapp.com/attachments/1270634825715417141/1274062128654848021/CH7RLEF.jpg?ex=66c0e252&is=66bf90d2&hm=cdcdc7aeb67154cec44d3209ade1fc03ce9c826443265109cd9fa14a8d5f6d8c&E" alt="Profile Picture">
+
+    <!-- Background Video -->
+    <video id="video-background" autoplay muted loop>
+        <source src="https://cdn.discordapp.com/attachments/1270634825715417141/1274050022836801599/4Bf1cvN.mp4?ex=66c0d70c&is=66bf858c&hm=c811d6a6b04e84273cc9d687ea1a71a6e2291e985ec3369cfc77e1a19d0c0c92&" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="profile-pic">
+            <img src="https://cdn.discordapp.com/attachments/1270634825715417141/1274062128654848021/CH7RLEF.jpg?ex=66c0e252&is=66bf90d2&hm=cdcdc7aeb67154cec44d3209ade1fc03ce9c826443265109cd9fa14a8d5f6d8c&" alt="Profile Picture">
         </div>
-        <p class="description">Software Engineer & Cybersecurity Professional</p>
+        <div class="description">Software Engineer & Cybersecurity Professional</div>
+        <div class="unmute" id="unmute-btn">-Unmute-</div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        const video = document.getElementById('video-background');
+        const unmuteBtn = document.getElementById('unmute-btn');
+
+        // Show unmute button once the video is ready
+        video.addEventListener('canplaythrough', () => {
+            unmuteBtn.style.display = 'block';
+        });
+
+        unmuteBtn.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false;
+                video.play();  // Ensure video plays with sound after unmute
+                unmuteBtn.textContent = '-Mute-';
+            } else {
+                video.muted = true;
+                unmuteBtn.textContent = '-Unmute-';
+            }
+        });
+
+        // Ensure video is muted when the page loads
+        window.addEventListener('load', () => {
+            video.muted = true;
+        });
+    </script>
+
 </body>
 </html>
