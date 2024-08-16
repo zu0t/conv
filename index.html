@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-gif">
+        <img src="Sources/background.gif" alt="Background" id="backgroundGif">
+    </div>
+
+    <div class="menu-icon" onclick="toggleSidebar()">
+        &#9776;
+    </div>
+
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <div class="menu-item" onclick="window.open('https://femboys.buzz/', '_blank')">
+                <img src="Sources/Idk.png" alt="Icon">
+                Unbinded
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="fade-in">Currency Converter</h1>
+        <div class="converter fade-in-up">
+            <div class="input-section">
+                <input type="number" id="amount" placeholder="Enter amount">
+                <div class="custom-dropdown" id="fromDropdown">
+                    <input type="text" placeholder="Search currency" onkeyup="filterOptions('fromDropdown')">
+                    <div class="options-container" id="fromCurrencyOptions"></div>
+                </div>
+                <span>to</span>
+                <div class="custom-dropdown" id="toDropdown">
+                    <input type="text" placeholder="Search currency" onkeyup="filterOptions('toDropdown')">
+                    <div class="options-container" id="toCurrencyOptions"></div>
+                </div>
+            </div>
+            <button onclick="convertCurrency()">Convert</button>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
