@@ -20,19 +20,6 @@
             background: #1a1a1a;
             position: relative;
         }
-
-        #backgroundVideo {
-            position: fixed;
-            top: 0;
-             left: 0;
-            bottom: 0;
-            right: 0;
-            z-index: -1;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none;
-        }
         
         #background-gif {
             position: fixed;
@@ -131,10 +118,7 @@
 <body>
 
     <!-- Background GIF -->
-
-    <video autoplay loop muted playsinline id="backgroundVideo">
-        <source src="./media/y2mate.com - Ratxhet Whap Whap Skillibeng Remix_480p.mp4" type="video/mp4">
-    </video>
+    <img id="background-gif" src="media/background.gif" alt="Background GIF">
     <!-- Hidden Background Audio (For Audio) -->
     <audio id="audio-background" preload="auto">
         <source src="https://cdn.discordapp.com/attachments/1270634825715417141/1274066731345641522/bnZdscf.mp3?ex=66c0e69b&is=66bf951b&hm=b9ec8cad851e9caedf43e55178ec8a619e8310284d88e98c50e5a2f28bc1bfbc&" type="audio/mp3">
