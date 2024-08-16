@@ -1,10 +1,12 @@
 // script.js
 document.addEventListener('DOMContentLoaded', function () {
-    const videoSource = document.getElementById('videoSource');
-    const videoURL = videoSource.src;
+    const video = document.getElementById('bgVideo');
+    const unmuteBtn = document.getElementById('unmuteBtn');
 
-    // Ensure video is .mp4 format
-    if (!videoURL.endsWith('.mp4')) {
-        alert('The provided video must be in .mp4 format.');
-    }
+    unmuteBtn.addEventListener('click', function () {
+        if (video.muted) {
+            video.muted = false;
+            unmuteBtn.style.display = 'none'; // Hide the button once unmuted
+        }
+    });
 });
