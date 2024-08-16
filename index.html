@@ -46,6 +46,7 @@
             border-radius: 15px;
             z-index: 1;
             filter: blur(6px); /* Added blur effect to the content box */
+            transition: filter 0.5s ease;
         }
 
         .profile-pic {
@@ -83,6 +84,27 @@
             cursor: pointer;
             display: none; /* Hidden until video loads */
         }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 3em;
+            cursor: pointer;
+            z-index: 2;
+            user-select: none;
+            text-transform: uppercase;
+            letter-spacing: 1em;
+            font-weight: 700;
+            transition: opacity 0.5s ease;
+        }
     </style>
 </head>
 <body>
@@ -92,22 +114,28 @@
 
     <!-- Hidden Background Video (For Audio) -->
     <video id="video-background" autoplay muted loop>
-        <source src="https://cdn.discordapp.com/attachments/1270634825715417141/1274064878805581915/cNLpGFo.mp4?ex=66c0e4e2&is=66bf9362&hm=fbda3bbad35d00ebf942d78550fe8cc09aabef4b940bc479be6868cbd593d1ca&" type="video/mp4">
+        <source src="https://cdn.discordapp.com/attachments/1270634825715417141/1274063769215045684/xOfupWs.mp4?ex=66c0e3d9&is=66bf9259&hm=a407d0d12f0766c562d29d45152ad89a03ed1f557e2bc46af8823f2beefb5c60&" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
     <!-- Main Content -->
     <div class="content">
         <div class="profile-pic">
-            <img src="https://tenor.com/view/abstract-animation-3d-animation-fluid-animation-vinay-chikkam-vinay0arts-gif-351201600304839116" alt="Profile Picture">
+            <img src="your-image-url.png" alt="Profile Picture">
         </div>
         <div class="description">Software Engineer & Cybersecurity Professional</div>
         <div class="unmute" id="unmute-btn">-Unmute-</div>
     </div>
 
+    <!-- Overlay with Click Text -->
+    <div class="overlay" id="click-overlay">C L I C K</div>
+
     <script>
         const video = document.getElementById('video-background');
         const unmuteBtn = document.getElementById('unmute-btn');
+        const clickOverlay = document.getElementById('click-overlay');
+        const content = document.querySelector('.content');
+        const backgroundGif = document.getElementById('background-gif');
 
         // Show unmute button once the video is ready
         video.addEventListener('canplaythrough', () => {
@@ -129,6 +157,14 @@
         // Ensure video is muted when the page loads
         window.addEventListener('load', () => {
             video.muted = true;
+        });
+
+        // Remove blur and overlay when the "C L I C K" text is clicked
+        clickOverlay.addEventListener('click', () => {
+            clickOverlay.style.opacity = '0';
+            setTimeout(() => clickOverlay.style.display = 'none', 500);
+            content.style.filter = 'none';
+            backgroundGif.style.filter = 'none';
         });
     </script>
 
