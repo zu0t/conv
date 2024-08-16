@@ -101,6 +101,18 @@
             font-weight: 700;
             transition: opacity 0.5s ease;
         }
+
+        .views-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 1.2em;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -126,12 +138,25 @@
     <!-- Overlay with Click Text -->
     <div class="overlay" id="click-overlay">C L I C K</div>
 
+    <!-- Views Counter -->
+    <div class="views-counter" id="views-counter">Views: 0</div>
+
     <script>
         const audio = document.getElementById('audio-background');
         const unmuteBtn = document.getElementById('unmute-btn');
         const clickOverlay = document.getElementById('click-overlay');
         const content = document.querySelector('.content');
         const backgroundGif = document.getElementById('background-gif');
+        const viewsCounter = document.getElementById('views-counter');
+
+        // Initialize view counter
+        let views = localStorage.getItem('views');
+        if (!views) {
+            views = 0;
+        }
+        views = parseInt(views) + 1;
+        localStorage.setItem('views', views);
+        viewsCounter.textContent = `Views: ${views}`;
 
         // Show unmute button once the audio is ready
         audio.addEventListener('canplaythrough', () => {
