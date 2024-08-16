@@ -32,10 +32,6 @@
             filter: blur(6px);
         }
 
-        #video-background {
-            display: none; /* Hide the video visually but still keep it for audio */
-        }
-
         .content {
             display: flex;
             flex-direction: column;
@@ -82,7 +78,7 @@
             color: #ff4081;
             font-size: 1.2em;
             cursor: pointer;
-            display: none; /* Hidden until video loads */
+            display: none; /* Hidden until audio is ready */
         }
 
         .overlay {
@@ -112,11 +108,11 @@
     <!-- Background GIF -->
     <img id="background-gif" src="https://media.tenor.com/6DvefuxBU1kAAAAd/abstract-animation-3d-animation.gif" alt="Background GIF">
 
-    <!-- Hidden Background Video (For Audio) -->
-    <video id="video-background" autoplay muted loop>
-        <source src="https://cdn.discordapp.com/attachments/1270634825715417141/1274063769215045684/xOfupWs.mp4?ex=66c0e3d9&is=66bf9259&hm=a407d0d12f0766c562d29d45152ad89a03ed1f557e2bc46af8823f2beefb5c60&" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <!-- Hidden Background Audio (For Audio) -->
+    <audio id="audio-background" preload="auto">
+        <source src="https://cdn.discordapp.com/attachments/1270634825715417141/1274066731345641522/bnZdscf.mp3?ex=66c0e69b&is=66bf951b&hm=b9ec8cad851e9caedf43e55178ec8a619e8310284d88e98c50e5a2f28bc1bfbc&" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
 
     <!-- Main Content -->
     <div class="content">
@@ -124,39 +120,38 @@
             <img src="https://cdn.discordapp.com/attachments/1270634825715417141/1274062128654848021/CH7RLEF.jpg?ex=66c0e252&is=66bf90d2&hm=cdcdc7aeb67154cec44d3209ade1fc03ce9c826443265109cd9fa14a8d5f6d8c&" alt="Profile Picture">
         </div>
         <div class="description">Software Engineer & Cybersecurity Professional</div>
-        <div class="unmute" id="unmute-btn">-Unmute-</div>
+        <div class="unmute" id="unmute-btn">-Unmutation-</div>
     </div>
 
     <!-- Overlay with Click Text -->
     <div class="overlay" id="click-overlay">C L I C K</div>
 
     <script>
-        const video = document.getElementById('video-background');
+        const audio = document.getElementById('audio-background');
         const unmuteBtn = document.getElementById('unmute-btn');
         const clickOverlay = document.getElementById('click-overlay');
         const content = document.querySelector('.content');
         const backgroundGif = document.getElementById('background-gif');
 
-        // Show unmute button once the video is ready
-        video.addEventListener('canplaythrough', () => {
+        // Show unmute button once the audio is ready
+        audio.addEventListener('canplaythrough', () => {
             unmuteBtn.style.display = 'block';
         });
 
         unmuteBtn.addEventListener('click', () => {
-            if (video.muted) {
-                video.muted = false;
-                video.style.display = 'block'; // Show the video for audio
-                video.play();  // Ensure video plays with sound after unmute
+            if (audio.muted) {
+                audio.muted = false;
+                audio.play();  // Ensure audio plays with sound after unmute
                 unmuteBtn.textContent = '-Mute-';
             } else {
-                video.muted = true;
+                audio.muted = true;
                 unmuteBtn.textContent = '-Unmute-';
             }
         });
 
-        // Ensure video is muted when the page loads
+        // Ensure audio is muted when the page loads
         window.addEventListener('load', () => {
-            video.muted = true;
+            audio.muted = true;
         });
 
         // Remove blur and overlay when the "C L I C K" text is clicked
