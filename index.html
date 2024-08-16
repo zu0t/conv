@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M a r l a</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
         body, html {
             margin: 0;
             padding: 0;
@@ -16,17 +18,22 @@
             justify-content: center;
             align-items: center;
             background: #1a1a1a;
+            position: relative;
         }
 
-        #video-background {
+        #background-gif {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -1;
-            filter: blur(8px);
+            z-index: -2;
+            filter: blur(6px);
+        }
+
+        #video-background {
+            display: none; /* Hide the video visually but still keep it for audio */
         }
 
         .content {
@@ -38,6 +45,7 @@
             padding: 20px;
             border-radius: 15px;
             z-index: 1;
+            filter: blur(6px); /* Added blur effect to the content box */
         }
 
         .profile-pic {
@@ -57,6 +65,15 @@
         .description {
             font-size: 1.5em;
             color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .description::after {
+            content: "✔"; /* Checkmark symbol */
+            font-size: 1em;
+            color: #4caf50;
+            margin-left: 10px;
         }
 
         .unmute {
@@ -70,16 +87,19 @@
 </head>
 <body>
 
-    <!-- Background Video -->
+    <!-- Background GIF -->
+    <img id="background-gif" src="https://media.tenor.com/6DvefuxBU1kAAAAd/abstract-animation-3d-animation.gif" alt="Background GIF">
+
+    <!-- Hidden Background Video (For Audio) -->
     <video id="video-background" autoplay muted loop>
-        <source src="https://cdn.discordapp.com/attachments/1270634825715417141/1274063769215045684/xOfupWs.mp4?ex=66c0e3d9&is=66bf9259&hm=a407d0d12f0766c562d29d45152ad89a03ed1f557e2bc46af8823f2beefb5c60&" type="video/mp4">
+        <source src="https://cdn.discordapp.com/attachments/1270634825715417141/1274064878805581915/cNLpGFo.mp4?ex=66c0e4e2&is=66bf9362&hm=fbda3bbad35d00ebf942d78550fe8cc09aabef4b940bc479be6868cbd593d1ca&" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
     <!-- Main Content -->
     <div class="content">
         <div class="profile-pic">
-            <img src="https://cdn.discordapp.com/attachments/1270634825715417141/1274062128654848021/CH7RLEF.jpg?ex=66c0e252&is=66bf90d2&hm=cdcdc7aeb67154cec44d3209ade1fc03ce9c826443265109cd9fa14a8d5f6d8c&" alt="Profile Picture">
+            <img src="https://tenor.com/view/abstract-animation-3d-animation-fluid-animation-vinay-chikkam-vinay0arts-gif-351201600304839116" alt="Profile Picture">
         </div>
         <div class="description">Software Engineer & Cybersecurity Professional</div>
         <div class="unmute" id="unmute-btn">-Unmute-</div>
@@ -97,6 +117,7 @@
         unmuteBtn.addEventListener('click', () => {
             if (video.muted) {
                 video.muted = false;
+                video.style.display = 'block'; // Show the video for audio
                 video.play();  // Ensure video plays with sound after unmute
                 unmuteBtn.textContent = '-Mute-';
             } else {
